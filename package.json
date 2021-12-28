@@ -1,0 +1,15 @@
+{
+  "name": "elm",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "watch": "elm-live src/Main.elm",
+    "format": "elm-format src/Main.elm --yes"
+  },
+  "devDependencies": {
+    "elm": "^0.19.1-5",
+    "elm-format": "^0.8.5",
+    "elm-live": "^4.0.2"
+  }
+}
