@@ -19,8 +19,7 @@ main =
 
 
 type Msg
-    = ScoreInc
-    | Move Time.Posix
+    = Move Time.Posix
     | ChangeDirection Direction
     | CreateFood Cell
     | None
@@ -242,9 +241,6 @@ isEatingFood snake food =
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
-        ScoreInc ->
-            ( { model | score = model.score + 1 }, Cmd.none )
-
         Move _ ->
             let
                 newSnake =
@@ -261,7 +257,14 @@ update msg model =
                     newInterval =
                         model.interval - logBase 2 (toFloat newScore)
                 in
-                ( { model | food = { x = -1, y = -1 }, snake = model.food :: newSnake, score = newScore, interval = newInterval }, createFood )
+                ( { model
+                    | food = { x = -1, y = -1 }
+                    , snake = model.food :: newSnake
+                    , score = newScore
+                    , interval = newInterval
+                  }
+                , createFood
+                )
 
             else
                 ( { model | snake = newSnake, canMove = True }, Cmd.none )
